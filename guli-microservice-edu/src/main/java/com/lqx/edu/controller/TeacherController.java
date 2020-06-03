@@ -30,10 +30,24 @@ import java.util.List;
 @RequestMapping("/edu/teacher")
 //@Api(value = "老师controller", tags = {"老师信息操作接口"})
 @Api(description = "讲师管理")
+@CrossOrigin
 public class TeacherController {
 
     @Autowired
     private TeacherService teacherService;
+
+    //{"code":20000,"data":{"token":"admin"}}
+    //模拟登陆
+    @PostMapping("login")
+    public ResponseResault login() {
+        return ResponseResault.ok().data("token","admin");
+    }
+
+    //{"code":20000,"data":{"roles":["admin"],"name":"admin","avatar":"https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif"}}
+    @GetMapping("info")
+    public ResponseResault info() {
+        return ResponseResault.ok().data("roles","[admin]").data("name","admin").data("avatar","https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif");
+    }
 
     @ResponseBody
     @GetMapping("/allTeacher")
